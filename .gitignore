@@ -6,6 +6,10 @@
 logs
 *.log
 npm-debug.log*
+<<<<<<< HEAD
+=======
+pnpm-debug.log*
+>>>>>>> 6274d7e0a8ef5906982d64ffa1fe1a53af64db9c
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
