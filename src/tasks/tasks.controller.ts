@@ -10,6 +10,10 @@ import { Task } from './task.entity';
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
+  @Get()
+  getAllTasks(): Promise<Task> {
+    return this.tasksService.getAllTasks();
+  }
   // @Get()
   // getTasks(@Query() filterDto: FilterTasksDto): Task[] {
   //   if (Object.keys(filterDto).length) {
@@ -31,14 +35,14 @@ export class TasksController {
     return this.tasksService.createTask(createTaskDto);
   }
 
-  // @Patch('/:id/status')
-  // updateTaskStatus(
-  //   @Param('id') id: string,
-  //   @Body() updateTaskStatusDto: UpdateTaskStatusDto,
-  // ): Task {
-  //   const { status } = updateTaskStatusDto;
-  //   return this.tasksService.updateTaskStatus(id, status);
-  // }
+  @Patch('/:id/status')
+  updateTaskStatus(
+    @Param('id') id: string,
+    @Body() updateTaskStatusDto: UpdateTaskStatusDto,
+  ): Promise<Task> {
+    const { status } = updateTaskStatusDto;
+    return this.tasksService.updateTaskStatus(id, status);
+  }
 
   // @Delete()
   // deleteAllTasks(): string {

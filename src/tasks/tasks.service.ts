@@ -13,9 +13,10 @@ export class TasksService {
     @InjectRepository(TasksRepository)
     private taskRepository: TasksRepository
   ) {}
-  // getAllTasks(): Task[] {
-  //   return this.tasks;
-  // }
+  
+  async getAllTasks(): Promise<Task> {
+    return this.taskRepository.query('SELECT * FROM task');
+  }
 
   // getTasksWithFilters(filterDto: FilterTasksDto): Task[] {
   //   const { status, search } = filterDto;
@@ -67,11 +68,14 @@ export class TasksService {
   //   return task;
   // }
 
-	// updateTaskStatus(id: string, status: TaskStatus): Task {
-	// 	const task = this.getTaskById(id);
-	// 	task.status = status;
-	// 	return task;
-	// }
+	async updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
+		const task = await this.getTaskById(id);
+		task.status = status
+    
+    await this.taskRepository.save(task);
+    
+		return task;
+	}
 
 	// deleteAllTasks(): string {
 	// 	this.tasks = [];
