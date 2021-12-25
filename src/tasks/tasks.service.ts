@@ -14,31 +14,13 @@ export class TasksService {
     private taskRepository: TasksRepository
   ) {}
   
-  async getAllTasks(): Promise<Task> {
-    return this.taskRepository.query('SELECT * FROM task');
-  }
-
-  // getTasksWithFilters(filterDto: FilterTasksDto): Task[] {
-  //   const { status, search } = filterDto;
-
-  //   let tasks = this.getAllTasks();
-
-  //   if (status) {
-  //     tasks = tasks.filter((task) => task.status === status);
-  //   }
-
-  //   if (search) {
-  //     tasks = tasks.filter((task) => {
-  //       if (task.title.includes(search) || task.description.includes(search)) {
-  //         return true;
-  //       }
-
-  //       return false;
-  //     });
-  //   }
-
-  //   return tasks;
+  // async getAllTasks(): Promise<Task> {
+  //   return this.taskRepository.query('SELECT * FROM task');
   // }
+
+  getTasks(filterDto: FilterTasksDto): Promise<Task[]> {
+    return this.taskRepository.getTasks(filterDto);
+  }
 
   async getTaskById(id: string): Promise<Task> {
     const found = await this.taskRepository.findOne(id);

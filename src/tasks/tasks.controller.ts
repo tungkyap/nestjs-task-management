@@ -10,20 +10,16 @@ import { Task } from './task.entity';
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
-  @Get()
-  getAllTasks(): Promise<Task> {
-    return this.tasksService.getAllTasks();
-  }
   // @Get()
-  // getTasks(@Query() filterDto: FilterTasksDto): Task[] {
-  //   if (Object.keys(filterDto).length) {
-  //     return this.tasksService.getTasksWithFilters(filterDto);
-  //   } else {
-  //     return this.tasksService.getAllTasks();
-  //   }
-    
+  // getAllTasks(): Promise<Task> {
   //   return this.tasksService.getAllTasks();
   // }
+
+
+  @Get()
+  getTasks(@Query() filterDto: FilterTasksDto): Promise<Task[]> {
+    return this.tasksService.getTasks(filterDto);
+  }
 
   @Get('/:id')
   getTaskById(@Param('id') id: string): Promise<Task> {
